@@ -11,7 +11,7 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 
-// @version 1.0
+// @version 2
 
 /**
  *
