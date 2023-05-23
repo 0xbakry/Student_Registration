@@ -20,7 +20,7 @@ jobs:
         run: docker build -t 0xbakry/component1:latest .
 
       - name: Log in to Docker Hub
-        run: docker login -u 0xbakry -p ${{ dckr_pat_XsYLQmNHnHtBEVHlvmluY0APJiw }}
+        run: docker login -u 0xbakry -p ${{ secrets.DOCKERHUB_TOKEN  }}
 
       - name: Push Docker image
         run: docker push 0xbakry/component1:latest
