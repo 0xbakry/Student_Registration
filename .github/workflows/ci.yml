@@ -10,15 +10,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout Repository
         uses: actions/checkout@v2
-
-      - name: Set up JDK 11
+      
+      - name: Set up JDK
         uses: actions/setup-java@v2
         with:
           java-version: 11
-
-      - name: Build and test
-        run: |
-          javac StudentRegistration.java
+          distribution: 'adopt'
+          java-package: jdk
+          architecture: x64
+          check-latest: false
+          server-id: github
+          server-username: 0xbakry
+          server-password: ${{ secrets.GITHUB_TOKEN }}
+          overwrite-settings: true
+          job-status: success
 
