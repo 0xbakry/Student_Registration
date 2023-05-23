@@ -1,0 +1,26 @@
+name: CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker
+        uses: docker/setup-docker@v1
+
+      - name: Build Docker image
+        run: docker build -t 0xbakry/component1:latest .
+
+      - name: Log in to Docker Hub
+        run: docker login -u 0xbakry -p ${{ dckr_pat_XsYLQmNHnHtBEVHlvmluY0APJiw }}
+
+      - name: Push Docker image
+        run: docker push 0xbakry/component1:latest
