@@ -5,10 +5,10 @@ FROM openjdk:11
 WORKDIR /app
 
 # Copy the application files to the container
-COPY src/ /app/src/
+COPY *.java /app
 
 # Compile the Java application
-RUN javac /app/src/*.java
+RUN javac *.java
 
 # Set the command to run the application
 CMD ["java", "StudentRegistration"]
