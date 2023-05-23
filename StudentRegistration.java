@@ -143,7 +143,7 @@ public class StudentRegistration {
     }
 
     private static void writeBatchStudentsDataToCSV(List<Student> students) {
-        try ( FileWriter writer = new FileWriter("data.csv", true)) {
+        try ( FileWriter writer = new FileWriter("/app/data/batch/data.csv", true)) {
             for (Student student : students) {
                 writer.append(student.getName())
                         .append(";")
