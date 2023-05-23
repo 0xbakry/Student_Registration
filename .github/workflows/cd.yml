@@ -9,18 +9,33 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
+steps:
+      - name: Checkout Repository
         uses: actions/checkout@v2
-
-      - name: Set up Docker
-        uses: docker/setup-docker@v1
-
-      - name: Build Docker image
-        run: docker build -t 0xbakry/component1:latest .
-
+      
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: 11
+          distribution: 'adopt'
+          java-package: jdk
+          architecture: x64
+          check-latest: false
+          server-id: github
+          server-username: ${{ github.actor }}
+          server-password: ${{ secrets.GITHUB_TOKEN }}
+          overwrite-settings: true
+          job-status: success
+      
       - name: Log in to Docker Hub
-        run: docker login -u 0xbakry -p ${{ secrets.DOCKERHUB_TOKEN  }}
-
-      - name: Push Docker image
-        run: docker push 0xbakry/component1:latest
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/component1:latest
