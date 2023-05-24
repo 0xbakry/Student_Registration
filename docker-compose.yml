@@ -1,0 +1,19 @@
+services:
+  first-component:
+    image: 0xbakry/component1:latest
+    tty: true
+    stdin_open: true
+    ports:
+      - 8080:8080
+    volumes:
+      - ./app/data/batch:/app/data/batch
+
+  second-component:
+    image: 0xbakry/component2:latest
+    tty: true
+    stdin_open: true
+    ports:
+      - 8081:8081
+    volumes:
+      - ./app/data/batch:/app/data/batch
+
